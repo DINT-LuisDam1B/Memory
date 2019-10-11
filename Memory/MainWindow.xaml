@@ -8,8 +8,8 @@
         Title="Memory" Height="450" Width="800">
     <Grid Background="Orange">
         <DockPanel>
-            <Border DockPanel.Dock="Top" Orientation="Horizontal" MinHeight="50" Margin="20">
-                <StackPanel>
+            <Border DockPanel.Dock="Top" MinHeight="50" Margin="20">
+                <StackPanel Orientation="Horizontal">
 
                     <TextBlock Text="Dificultad" Padding="5"></TextBlock>
 
