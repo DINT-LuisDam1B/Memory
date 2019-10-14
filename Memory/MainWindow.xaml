@@ -8,31 +8,48 @@
         Title="Memory" Height="450" Width="800">
     <Grid Background="Orange">
         <DockPanel>
-            <Border DockPanel.Dock="Top" MinHeight="50" Margin="20">
-                <StackPanel Orientation="Horizontal">
+            <Border 
+                DockPanel.Dock="Top" Width="720" MinHeight="50" Margin="20" Padding="10" HorizontalAlignment="Left" 
+                BorderBrush="Black" BorderThickness="4" CornerRadius="10" Background="White">
+                <StackPanel Orientation="Horizontal" Background="White">
 
-                    <TextBlock Text="Dificultad" Padding="5"></TextBlock>
+                    <TextBlock Text="Dificultad" Padding="5" FontWeight="Bold"></TextBlock>
 
-                    <RadioButton></RadioButton>
-                    <TextBlock Text="Baja"></TextBlock>
-                    <RadioButton></RadioButton>
-                    <TextBlock Text="Media"></TextBlock>
-                    <RadioButton></RadioButton>
-                    <TextBlock Text="Alta"></TextBlock>
+                    <RadioButton x:Name="Button_DifBaja" Tag="3" Padding="5" VerticalAlignment="Center" FlowDirection="RightToLeft" IsChecked="True"/>
+                    <TextBlock Text="Baja" Padding="5" FontWeight="Bold"></TextBlock>
 
-                    <Button>Iniciar</Button>
+                    <RadioButton x:Name="Button_DifMedia" Tag="4" Padding="5" VerticalAlignment="Center" FlowDirection="RightToLeft"></RadioButton>
+                    <TextBlock Text="Media" Padding="5" FontWeight="Bold"></TextBlock>
+
+                    <RadioButton x:Name="Button_DifAlta" Tag="5" Padding="5" VerticalAlignment="Center" FlowDirection="RightToLeft"></RadioButton>
+                    <TextBlock Text="Alta" Padding="5" FontWeight="Bold"></TextBlock>
+
+                    <Button Padding="5" Margin="30,0" Click="Button_Click_Iniciar">Iniciar</Button>
 
                 </StackPanel>
 
             </Border>
+
+
+            <Border DockPanel.Dock="Bottom" BorderBrush="Black" Margin="5" Padding="5"
+                    BorderThickness="4" CornerRadius="10" Background="White">
+
+                <DockPanel MinHeight="10" Margin="10">
+                    <Button DockPanel.Dock="Right" Content="Mostrar" Margin="10"></Button>
+                    <ProgressBar Minimum="0" Maximum="100" Height="20" Margin="10"></ProgressBar>
+
+                </DockPanel>
+
+            </Border>
             
 
-            <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" MinHeight="50" Margin="20">
-                <ProgressBar Minimum="0" Maximum="100" Height="20" Width="600"></ProgressBar>
-                <Button Content="Mostrar"></Button>
-            </StackPanel>
-
-            <Grid>
+            <Grid x:Name="Grid_Imagenes">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
             
             </Grid>
             
