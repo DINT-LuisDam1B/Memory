@@ -32,14 +32,35 @@ namespace Memory
                 Grid_Imagenes.RowDefinitions.Add(new RowDefinition());
             }
 
-            for (int i = 0; i < NUMCOLUMNAS; i++)
+            for (int i = 0; i < numFilas; i++)
             {
-                for (int j = 0; j < numFilas; j++)
+                for (int j = 0; j < NUMCOLUMNAS; j++)
                 {
+                    Viewbox viewbox = new Viewbox();
                     TextBlock textBlock = new TextBlock();
-                    Grid_Imagenes.Children.Add(textBlock);
-                  
-                    textBlock.
+                    Border border = new Border();
+
+                    border.BorderBrush = Brushes.Black;
+                    border.BorderThickness = new Thickness(2);
+                    border.Padding = new Thickness(5);
+                    border.CornerRadius = new CornerRadius(4);
+                    border.Margin = new Thickness(2);
+                    border.Background = Brushes.Aquamarine;
+                    border.Background = new GradientBrush
+
+                    textBlock.Text = "h";
+                    textBlock.FontFamily = new FontFamily("Webdings");
+
+                    viewbox.Child = textBlock;
+                    border.Child = viewbox;
+                    
+                    
+                    Grid.SetColumn(border,j);
+                    Grid.SetRow(border,i);
+
+                    Grid_Imagenes.Children.Add(border);
+
+
                 }
             }
         }
@@ -51,7 +72,22 @@ namespace Memory
 
         private void Button_Click_Iniciar(object sender, RoutedEventArgs e)
         {
-            int numFilas = (int)((RadioButton)sender).Tag;
+            int numFilas = 0;
+
+            if (Button_DifBaja.IsChecked == true)
+            {
+                numFilas = Convert.ToInt32(Button_DifBaja.Tag);
+            }
+            else if (Button_DifMedia.IsChecked == true)
+            {
+                numFilas = Convert.ToInt32(Button_DifMedia.Tag);
+            }
+            else
+            {
+                numFilas = Convert.ToInt32(Button_DifAlta.Tag);
+            }
+
+
             CrarTabla(numFilas);
 
         }
