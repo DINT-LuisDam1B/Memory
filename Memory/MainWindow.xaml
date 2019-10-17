@@ -5,46 +5,64 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Memory"
         mc:Ignorable="d"
-        Title="Memory" Height="450" Width="800">
-    <Grid Background="Orange">
-        <DockPanel>
-            <Border 
-                DockPanel.Dock="Top" Width="auto" MinHeight="50" Margin="20" Padding="10" HorizontalAlignment="Left" 
-                BorderBrush="Black" BorderThickness="4" CornerRadius="10" Background="White">
-                <DockPanel  Background="White">
+        Title="Memory" Height="450" Width="800" MinHeight="450" MinWidth="450">
 
-                    <TextBlock Text="Dificultad" Padding="5" FontWeight="Bold"></TextBlock>
+
+    <Window.Resources>
+        <!--Estilos para botones-->
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect 
+                              Direction="-50"
+                              Color="Black"
+                              RenderingBias="Quality"/>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="FontFamily" Value="Comic Sans MS"></Setter>
+        </Style>
+    </Window.Resources>
+    
+    <Grid x:Name="Grid_Principal" Background="Orange">
+        <DockPanel>
+            <Border x:Name="Border_PanelSuperior" 
+                DockPanel.Dock="Top" Margin="15" Padding="10" HorizontalAlignment="Left" 
+                BorderBrush="Black" BorderThickness="4" CornerRadius="10" Background="White">
+                <DockPanel  Background="White" >
+
+                    <TextBlock x:Name="textBlock_Dificultad" Text="Dificultad:" Padding="5" FontWeight="Bold"></TextBlock>
 
                     <RadioButton x:Name="Button_DifBaja" Tag="3" Padding="5" VerticalAlignment="Center" FlowDirection="RightToLeft" IsChecked="True"/>
-                    <TextBlock Text="Baja" Padding="5" FontWeight="Bold"></TextBlock>
+                    <TextBlock x:Name="textBlock_Baja" Text="Baja" Padding="5" FontWeight="Bold"></TextBlock>
 
                     <RadioButton x:Name="Button_DifMedia" Tag="4" Padding="5" VerticalAlignment="Center" FlowDirection="RightToLeft"></RadioButton>
-                    <TextBlock Text="Media" Padding="5" FontWeight="Bold"></TextBlock>
+                    <TextBlock x:Name="textBlock_Media" Text="Media" Padding="5" FontWeight="Bold"></TextBlock>
 
                     <RadioButton x:Name="Button_DifAlta" Tag="5" Padding="5" VerticalAlignment="Center" FlowDirection="RightToLeft"></RadioButton>
-                    <TextBlock Text="Alta" Padding="5" FontWeight="Bold"></TextBlock>
+                    <TextBlock x:Name="textBLock_Alta" Text="Alta" Padding="5" FontWeight="Bold"></TextBlock>
 
-                    <Button Padding="5" Margin="30,0" Click="Button_Click_Iniciar">Iniciar</Button>
+                    <Button x:Name="Button_Iniciar" Padding="15,2" Margin="30,0" Click="Button_Click_Iniciar">Iniciar</Button>
 
                 </DockPanel>
 
             </Border>
 
 
-            <Border DockPanel.Dock="Bottom" BorderBrush="Black" Margin="5" Padding="5"
+            <Border x:Name="Border_PanelInferior" DockPanel.Dock="Bottom" BorderBrush="Black" Margin="5" Padding="2"
                     BorderThickness="4" CornerRadius="10" Background="White">
 
                 <DockPanel MinHeight="10" Margin="10">
-                    <Button DockPanel.Dock="Right" Content="Mostrar" Margin="10"></Button>
+                    <Button x:Name="Button_Mostrar" DockPanel.Dock="Right" Content="Mostrar" Margin="10,5" Padding="15,2"></Button>
                     
-                    <ProgressBar Minimum="0" Maximum="100" Height="20" Margin="10"></ProgressBar>
+                    <ProgressBar x:Name="ProgressBar_Progreso" Minimum="0" Maximum="100" Height="20" Margin="5"></ProgressBar>
 
                 </DockPanel>
 
             </Border>
             
 
-            <Grid x:Name="Grid_Imagenes">
+            <Grid x:Name="Grid_Imagenes" Margin="5">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
