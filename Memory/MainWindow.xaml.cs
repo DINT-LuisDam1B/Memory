@@ -47,7 +47,7 @@ namespace Memory
             {
                 numFilas = Convert.ToInt32(Button_DifAlta.Tag);
             }
-            CrearTabla(numFilas,lista);
+            CrearTabla(numFilas);
 
         }
 
@@ -85,7 +85,7 @@ namespace Memory
             return lista[generador.Next(0,9)];
         }
 
-        public void CrearTabla(int numFilas, List<string> lista)
+        public void CrearTabla(int numFilas)
         {
             Grid_Imagenes.RowDefinitions.Clear();
 
@@ -113,7 +113,7 @@ namespace Memory
                     border.MouseDown += new MouseButtonEventHandler(MouseDown_Border);
                     textBlock.FontFamily = new FontFamily("Webdings");
 
-                    string caracter = GenerarCaracter();
+                    string caracter = EstaPareja();
                     border.Tag = i + "," + j + "," + caracter;
                     viewbox.Child = textBlock;
                     border.Child = viewbox;
@@ -122,11 +122,59 @@ namespace Memory
                     Grid.SetColumn(border,j);
                     Grid.SetRow(border,i);
 
-                    listaCartas.Add("" + i +","+ j +"," +caracter);
+                    //listaCartas.Add("" + i +","+ j +"," +caracter);
                     Grid_Imagenes.Children.Add(border);
 
                 }
             }
+        }
+
+        public string EstaPareja()
+        {
+            
+            int veces = 0;
+            string caracter = "";
+            bool salir = false;
+
+            caracter = GenerarCaracter();
+
+            if (listaCartas.Count == 0 || listaCartas.Count == 1)
+            {
+                
+                listaCartas.Add(caracter);
+            }
+            else
+            {
+                while (!salir)
+                {
+                    
+                    if (!listaCartas.Contains(caracter))
+                    {
+                        listaCartas.Add(caracter);
+                        salir = true;
+                    }
+                    else
+                    {
+                        for (int i = 0; i < listaCartas.Count; i++)
+                        {
+                            if (listaCartas[i] == caracter)
+                            {
+                                veces++;
+                            }
+                        }
+                        if (veces < 2)
+                        {
+                            listaCartas.Add(caracter);
+                            salir = true;
+                        }
+                        else
+                        {
+                            caracter = GenerarCaracter();
+                        }
+                    }
+                }
+            }
+            return caracter;
         }
 
         public MainWindow()
