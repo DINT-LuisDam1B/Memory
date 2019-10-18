@@ -28,8 +28,8 @@
         <DockPanel>
             <Border x:Name="Border_PanelSuperior" 
                 DockPanel.Dock="Top" Margin="15" Padding="10" HorizontalAlignment="Left" 
-                BorderBrush="Black" BorderThickness="4" CornerRadius="10" Background="White">
-                <DockPanel  Background="White" >
+                BorderBrush="Black" BorderThickness="4" CornerRadius="10" Background="White" Width="auto">
+                <DockPanel  Background="White" LastChildFill="False">
 
                     <TextBlock x:Name="textBlock_Dificultad" Text="Dificultad:" Padding="5" FontWeight="Bold"></TextBlock>
 
@@ -53,7 +53,7 @@
                     BorderThickness="4" CornerRadius="10" Background="White">
 
                 <DockPanel MinHeight="10" Margin="10">
-                    <Button x:Name="Button_Mostrar" DockPanel.Dock="Right" Content="Mostrar" Margin="10,5" Padding="15,2"></Button>
+                    <Button x:Name="Button_Mostrar" DockPanel.Dock="Right" Content="Mostrar" Margin="10,5" Padding="15,2" Click="Button_Mostrar_Click"></Button>
                     
                     <ProgressBar x:Name="ProgressBar_Progreso" Minimum="0" Maximum="100" Height="20" Margin="5"></ProgressBar>
 

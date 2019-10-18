@@ -23,6 +23,9 @@ namespace Memory
     public partial class MainWindow : Window
     {
         public const int NUMCOLUMNAS = 4;
+        Random generador = new Random();
+        List<string> listaCartas = new List<string>();
+
 
         //Eventos
 
@@ -44,16 +47,21 @@ namespace Memory
             {
                 numFilas = Convert.ToInt32(Button_DifAlta.Tag);
             }
-            CrearTabla(numFilas);
+            CrearTabla(numFilas,lista);
 
         }
 
-        private void MouseDown_TextBlock(object sender,RoutedEventArgs e)
+        private void MouseDown_Border(object sender,RoutedEventArgs e)
         {
-            TextBlock auxTextBlock = ((TextBlock)sender);
+            
+            Border auxBorder = ((Border)sender);
+            Viewbox auxViewbox = (Viewbox)auxBorder.Child;
+            TextBlock auxTextBlock = (TextBlock)auxViewbox.Child;
 
-            auxTextBlock.Text = GenerarCaracter();
-            auxTextBlock.Background = Brushes.White;
+            string[] elementos = (auxBorder.Tag).ToString().Split(',');
+
+            auxTextBlock.Text = elementos[2];
+            auxBorder.Background = Brushes.White;
         } 
 
         //Metodos
@@ -62,8 +70,8 @@ namespace Memory
 
         public string GenerarCaracter()
         {
-            Random generador = new Random();
             List<string> lista = new List<string>();
+
             lista.Add("f");
             lista.Add("h");
             lista.Add("k");
@@ -77,7 +85,7 @@ namespace Memory
             return lista[generador.Next(0,9)];
         }
 
-        public void CrearTabla(int numFilas)
+        public void CrearTabla(int numFilas, List<string> lista)
         {
             Grid_Imagenes.RowDefinitions.Clear();
 
@@ -96,15 +104,17 @@ namespace Memory
 
                     border.BorderBrush = Brushes.Black;
                     border.BorderThickness = new Thickness(2);
-                    //border.Padding = new Thickness(5);
+                
                     border.CornerRadius = new CornerRadius(4);
                     border.Margin = new Thickness(2);
-                    textBlock.Background = new LinearGradientBrush(Colors.White, Colors.SteelBlue, new Point(0.5, 0), new Point(0.5,1));
+                    border.Background = new LinearGradientBrush(Colors.White, Colors.SteelBlue, new Point(0.5, 0), new Point(0.5,1));
 
                     textBlock.Text = "s";
-                    textBlock.MouseDown += new MouseButtonEventHandler(MouseDown_TextBlock);
+                    border.MouseDown += new MouseButtonEventHandler(MouseDown_Border);
                     textBlock.FontFamily = new FontFamily("Webdings");
 
+                    string caracter = GenerarCaracter();
+                    border.Tag = i + "," + j + "," + caracter;
                     viewbox.Child = textBlock;
                     border.Child = viewbox;
                     
@@ -112,6 +122,7 @@ namespace Memory
                     Grid.SetColumn(border,j);
                     Grid.SetRow(border,i);
 
+                    listaCartas.Add("" + i +","+ j +"," +caracter);
                     Grid_Imagenes.Children.Add(border);
 
                 }
@@ -121,8 +132,12 @@ namespace Memory
         public MainWindow()
         {
             InitializeComponent();
+            
         }
 
-        
+        private void Button_Mostrar_Click(object sender, RoutedEventArgs e)
+        {
+          
+        }
     }
 }
