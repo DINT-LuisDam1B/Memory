@@ -31,7 +31,7 @@ namespace Memory
 
         private void Button_Click_Iniciar(object sender, RoutedEventArgs e)
         {
-            
+            listaCartas.Clear();
 
             int numFilas = 0;
 
@@ -82,7 +82,9 @@ namespace Memory
             lista.Add("2");
             lista.Add("8");
             lista.Add("m");
-            return lista[generador.Next(0,9)];
+            lista.Add("B");
+            lista.Add(".");
+            return lista[generador.Next(0,11)];
         }
 
         public void CrearTabla(int numFilas)
@@ -122,7 +124,7 @@ namespace Memory
                     Grid.SetColumn(border,j);
                     Grid.SetRow(border,i);
 
-                    //listaCartas.Add("" + i +","+ j +"," +caracter);
+                    listaCartas.Add("" + i +","+ j +"," +caracter);
                     Grid_Imagenes.Children.Add(border);
 
                 }
@@ -131,7 +133,7 @@ namespace Memory
 
         public string EstaPareja()
         {
-            
+
             int veces = 0;
             string caracter = "";
             bool salir = false;
@@ -170,6 +172,7 @@ namespace Memory
                         else
                         {
                             caracter = GenerarCaracter();
+                            veces = 0;
                         }
                     }
                 }
