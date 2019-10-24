@@ -32,6 +32,7 @@ namespace Memory
         private void Button_Click_Iniciar(object sender, RoutedEventArgs e)
         {
             listaCartas.Clear();
+            ProgressBar_Progreso.Value = 0;
 
             int numFilas = 0;
 
@@ -75,15 +76,15 @@ namespace Memory
             lista.Add("f");
             lista.Add("h");
             lista.Add("k");
-            lista.Add("ñ");
-            lista.Add(",");
+            lista.Add("o");
+            lista.Add("Y");
             lista.Add("d");
             lista.Add("b");
             lista.Add("2");
             lista.Add("8");
             lista.Add("m");
             lista.Add("B");
-            lista.Add(".");
+            lista.Add("u");
             return lista[generador.Next(0,11)];
         }
 
@@ -117,6 +118,7 @@ namespace Memory
 
                     string caracter = EstaPareja();
                     border.Tag = i + "," + j + "," + caracter;
+                    textBlock.Tag = caracter;
                     viewbox.Child = textBlock;
                     border.Child = viewbox;
                     
@@ -126,7 +128,6 @@ namespace Memory
 
                     listaCartas.Add("" + i +","+ j +"," +caracter);
                     Grid_Imagenes.Children.Add(border);
-
                 }
             }
         }
@@ -188,7 +189,22 @@ namespace Memory
 
         private void Button_Mostrar_Click(object sender, RoutedEventArgs e)
         {
-          
+            if (Grid_Imagenes.Children.Count != 0)
+            {
+                ProgressBar_Progreso.Value = 100;
+            }
+            
+
+            foreach (Border item in Grid_Imagenes.Children)
+            {
+                Viewbox auxViewbox = (Viewbox)item.Child;
+                TextBlock auxTextBlock = (TextBlock)auxViewbox.Child;
+                auxTextBlock.Text = (string)auxTextBlock.Tag;
+                item.Background = Brushes.White;
+            }
+
+            
+           
         }
     }
 }
