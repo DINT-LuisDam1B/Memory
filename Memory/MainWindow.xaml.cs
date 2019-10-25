@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace Memory
 {
@@ -23,6 +24,18 @@ namespace Memory
     public partial class MainWindow : Window
     {
         public const int NUMCOLUMNAS = 4;
+
+        public int contadorClicks = 0;
+        public int progreso=0;
+
+        public bool nuevaRonda = false;
+        public bool sonPareja= false;
+
+        public Border border1;
+        public Border border2;
+
+        DispatcherTimer temporizador = new DispatcherTimer();
+
         Random generador = new Random();
         List<string> listaCartas = new List<string>();
 
@@ -49,7 +62,8 @@ namespace Memory
                 numFilas = Convert.ToInt32(Button_DifAlta.Tag);
             }
             CrearTabla(numFilas);
-
+            progreso = 100 / numFilas*2;
+            
         }
 
         private void MouseDown_Border(object sender,RoutedEventArgs e)
@@ -59,12 +73,33 @@ namespace Memory
             Viewbox auxViewbox = (Viewbox)auxBorder.Child;
             TextBlock auxTextBlock = (TextBlock)auxViewbox.Child;
 
-            string[] elementos = (auxBorder.Tag).ToString().Split(',');
-
-            auxTextBlock.Text = elementos[2];
+            auxTextBlock.Text = auxBorder.Tag.ToString();
             auxBorder.Background = Brushes.White;
-        } 
 
+            if (nuevaRonda)
+            {
+                contadorClicks = 0;
+                border1 = null;
+                border2 = null;
+                nuevaRonda = false;
+            }
+            
+
+            contadorClicks++;
+            if (contadorClicks == 1)
+            {
+                border1 = auxBorder;
+            }
+            else if (contadorClicks == 2)
+            {
+
+                border2 = auxBorder;
+                temporizador.Start();
+                nuevaRonda = true;
+            }
+            
+
+        } 
         //Metodos
 
         //Metodo devuelve caracter
@@ -117,7 +152,7 @@ namespace Memory
                     textBlock.FontFamily = new FontFamily("Webdings");
 
                     string caracter = EstaPareja();
-                    border.Tag = i + "," + j + "," + caracter;
+                    border.Tag = caracter;
                     textBlock.Tag = caracter;
                     viewbox.Child = textBlock;
                     border.Child = viewbox;
@@ -184,7 +219,26 @@ namespace Memory
         public MainWindow()
         {
             InitializeComponent();
+            temporizador.Tick += TcomprobarParejas;
+            temporizador.Interval = TimeSpan.FromSeconds(1);
             
+        }
+
+        private void TcomprobarParejas(object sender, EventArgs e)
+        {
+            Border borderCarta1;
+            Border borderCarta2;
+
+            if (border1.Tag.ToString().Equals(border2.Tag.ToString()) )
+            {
+                ProgressBar_Progreso.Value += progreso;
+                sonPareja = true;
+
+            }
+
+            nuevaRonda = true;
+            temporizador.Stop();
+
         }
 
         private void Button_Mostrar_Click(object sender, RoutedEventArgs e)

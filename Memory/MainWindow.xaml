@@ -27,7 +27,7 @@
     <Grid x:Name="Grid_Principal" Background="Orange">
         <DockPanel>
             <Border x:Name="Border_PanelSuperior" 
-                DockPanel.Dock="Top" Margin="5" Padding="10"  
+                DockPanel.Dock="Top" Margin="5,5,5,2" Padding="10"  
                 BorderBrush="Black" BorderThickness="4" CornerRadius="10" Background="White">
                 
                 <StackPanel Orientation="Horizontal" Background="White">
@@ -50,10 +50,10 @@
             </Border>
 
 
-            <Border x:Name="Border_PanelInferior" DockPanel.Dock="Bottom" BorderBrush="Black" Margin="5" Padding="2"
+            <Border x:Name="Border_PanelInferior" DockPanel.Dock="Bottom" BorderBrush="Black" Margin="5,2,5,5" Padding="2"
                     BorderThickness="4" CornerRadius="10" Background="White">
 
-                <DockPanel MinHeight="10" Margin="10">
+                <DockPanel MinHeight="10" Margin="3">
                     <Button x:Name="Button_Mostrar" DockPanel.Dock="Right" Content="Mostrar" Margin="10,5" Padding="15,2" Click="Button_Mostrar_Click"/>
 
                     <ProgressBar x:Name="ProgressBar_Progreso" Minimum="0" Maximum="100" Height="20" Margin="5" Foreground="DarkBlue"></ProgressBar>
